@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "AggieMate – UC Davis Schedule Tools",
+  "description": "Enhance UC Davis Schedule Builder with calendar export and RateMyProfessors ratings.",
+  "version": "3.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "rmp_background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://my.ucdavis.edu/schedulebuilder/*",
+    "https://schedulebuilder.ucdavis.edu/*",
+    "https://www.ratemyprofessors.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.ucdavis.edu/schedulebuilder/*",
+        "https://schedulebuilder.ucdavis.edu/*"
+      ],
+      "js": ["inject_button.js", "rmp_content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["cow.gif"],
+      "matches": ["*://*.ucdavis.edu/*"]
+    }
+  ],
+  "action": {
+    "default_title": "AggieMate – UC Davis Schedule Tools",
+    "default_icon": {
+      "128": "icon128.png"
+    }
+  }
+}
